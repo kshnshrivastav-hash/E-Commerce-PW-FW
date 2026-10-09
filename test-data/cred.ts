@@ -9,4 +9,6 @@ export const users : Record<string,User> = {
     invalidPassword: { username: 'standard_user', password: 'wrong_password' },
     invalidUsername: { username: 'wrong_user', password: 'secret_sauce' },
     empty: { username: '', password: '' },
+    emptyUsername: { username: '', password: 'secret_sauce' },
+    emptyPassword: { username: 'standard_user', password: '' },
 };
