@@ -1,7 +1,7 @@
 import { test, expect } from '../fixtures/Fixture';
 import { products, checkoutInfo } from '../test-data/products';
 
-test('Complete checkout with one item', async ({ productPage, cartPage, checkoutPage }) => {
+test('Complete checkout with one item', { tag: ['@smoke', '@ui'] }, async ({ productPage, cartPage, checkoutPage }) => {
   await productPage.addToCart(products.backpack.name);
   await productPage.openCart();
   await cartPage.checkout();
@@ -13,7 +13,7 @@ test('Complete checkout with one item', async ({ productPage, cartPage, checkout
   await checkoutPage.expectOrderComplete();
 });
 
-test('Complete checkout with two items', async ({ productPage, cartPage, checkoutPage }) => {
+test('Complete checkout with two items', { tag: '@ui' }, async ({ productPage, cartPage, checkoutPage }) => {
   await productPage.addToCart(products.bikeLight.name);
   await productPage.addToCart(products.onesie.name);
   await productPage.openCart();
@@ -25,7 +25,7 @@ test('Complete checkout with two items', async ({ productPage, cartPage, checkou
   await checkoutPage.expectOrderComplete();
 });
 
-test('Order summary totals add up', async ({ productPage, cartPage, checkoutPage }) => {
+test('Order summary totals add up', { tag: '@ui' }, async ({ productPage, cartPage, checkoutPage }) => {
   await productPage.addToCart(products.backpack.name);
   await productPage.addToCart(products.bikeLight.name);
   await productPage.openCart();
@@ -49,7 +49,7 @@ const missingFieldCases = [
 ];
 
 for (const c of missingFieldCases) {
-  test(`Checkout is blocked when ${c.name} is missing`, async ({ productPage, cartPage, checkoutPage }) => {
+  test(`Checkout is blocked when ${c.name} is missing`, { tag: ['@negative', '@ui'] }, async ({ productPage, cartPage, checkoutPage }) => {
     await productPage.addToCart(products.backpack.name);
     await productPage.openCart();
     await cartPage.checkout();
@@ -60,7 +60,7 @@ for (const c of missingFieldCases) {
   });
 }
 
-test('Cancel on the information page returns to the cart', async ({ page, productPage, cartPage, checkoutPage }) => {
+test('Cancel on the information page returns to the cart', { tag: '@ui' }, async ({ page, productPage, cartPage, checkoutPage }) => {
   await productPage.addToCart(products.backpack.name);
   await productPage.openCart();
   await cartPage.checkout();
@@ -68,7 +68,7 @@ test('Cancel on the information page returns to the cart', async ({ page, produc
   await expect(page).toHaveURL(/cart\.html/);
 });
 
-test('Cart is empty after an order is completed', async ({ productPage, cartPage, checkoutPage }) => {
+test('Cart is empty after an order is completed', { tag: '@ui' }, async ({ productPage, cartPage, checkoutPage }) => {
   await productPage.addToCart(products.backpack.name);
   await productPage.openCart();
   await cartPage.checkout();

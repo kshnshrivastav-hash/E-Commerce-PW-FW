@@ -14,9 +14,21 @@ export default defineConfig({
     video: 'retain-on-failure',
   },
 
+  // Local shop API for the API tests (started automatically)
+  webServer: {
+    command: 'node mock/shop-server.js',
+    url: 'http://localhost:4100/health',
+    reuseExistingServer: !process.env.CI,
+  },
+
   projects: [
-    { name: 'chromium', use: { ...devices['Desktop Chrome'] } },
-    { name: 'firefox', use: { ...devices['Desktop Firefox'] } },
-    { name: 'webkit', use: { ...devices['Desktop Safari'] } },
+    {
+      name: 'api',
+      testMatch: /tests\/api\/.*\.spec\.ts/,
+      use: { baseURL: 'http://localhost:4100' },
+    },
+    { name: 'chromium', testIgnore: /tests\/api\//, use: { ...devices['Desktop Chrome'] } },
+    { name: 'firefox', testIgnore: /tests\/api\//, use: { ...devices['Desktop Firefox'] } },
+    { name: 'webkit', testIgnore: /tests\/api\//, use: { ...devices['Desktop Safari'] } },
   ],
 });

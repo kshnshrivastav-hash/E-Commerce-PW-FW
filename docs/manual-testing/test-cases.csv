@@ -1,0 +1,33 @@
+ID,Module,Title,Preconditions,Steps,Expected result,Priority,Type,Automation status
+TC-001,Login,Login with valid credentials,User exists,1. Open the site 2. Enter standard_user and valid password 3. Click Login,Inventory page opens with products,High,Functional,Automated: tests/login.spec.ts
+TC-002,Login,Login with a wrong password,None,1. Enter a valid username and a wrong password 2. Click Login,Error message about username and password not matching,High,Negative,Automated: tests/login.spec.ts
+TC-003,Login,Login with an unknown user,None,1. Enter an unknown username and any password 2. Click Login,Error message about username and password not matching,Medium,Negative,Automated: tests/login.spec.ts
+TC-004,Login,Login as a locked-out user,None,1. Enter the locked-out username 2. Click Login,Error message saying the user is locked out,High,Negative,Automated: tests/login.spec.ts
+TC-005,Login,Login with empty username,None,"1. Leave username empty, enter a password 2. Click Login",Error says username is required,Medium,Negative,Automated: tests/login.spec.ts
+TC-006,Login,Login with empty password,None,"1. Enter a username, leave password empty 2. Click Login",Error says password is required,Medium,Negative,Automated: tests/login.spec.ts
+TC-007,Login,Password field hides characters,None,1. Type into the password field,Characters are masked,Medium,Security,Manual
+TC-008,Session,Logout returns to the login page,Logged in,1. Open the menu 2. Click Logout,Login page is shown,High,Functional,Automated: tests/product.spec.ts
+TC-009,Session,Browser back after logout does not show the inventory,Logged out,1. Log out 2. Click the browser back button,Inventory is not shown to a logged-out user,High,Security,Manual
+TC-010,Products,Inventory shows all products,Logged in,1. Open the inventory page,All 6 products are listed with name and price,High,Functional,Automated: tests/product.spec.ts
+TC-011,Products,Product price is displayed correctly,Logged in,1. Check the backpack price,Price shows 29.99,Medium,Functional,Automated: tests/product.spec.ts
+TC-012,Products,Sort by name A to Z and Z to A,Logged in,1. Choose each name sort option,Products are ordered correctly,Medium,Functional,Automated: tests/product.spec.ts
+TC-013,Products,Sort by price low to high and high to low,Logged in,1. Choose each price sort option,Products are ordered by price,Medium,Functional,Automated: tests/product.spec.ts
+TC-014,Products,Product images match their names,Logged in,1. Look at each product image and name,Each image matches its product,Low,Usability,Manual
+TC-015,Cart,Add one item to the cart,Logged in,1. Click Add to cart on one product,Cart badge shows 1; button changes to Remove,High,Functional,Automated: tests/cart.spec.ts
+TC-016,Cart,Add two items and view the cart,Logged in,1. Add two products 2. Open the cart,Both items are listed with correct prices,High,Functional,Automated: tests/cart.spec.ts
+TC-017,Cart,Remove an item from the product page,Item in cart,1. Click Remove on the product,Cart badge disappears or reduces,Medium,Functional,Automated: tests/cart.spec.ts
+TC-018,Cart,Remove an item inside the cart,Two items in cart,1. Open the cart 2. Click Remove on one item,Only the other item remains,Medium,Functional,Automated: tests/cart.spec.ts
+TC-019,Cart,Cart contents survive a page refresh,Items in cart,1. Add items 2. Refresh the page,Items are still in the cart,Medium,Functional,Manual
+TC-020,Cart,Continue shopping returns to the inventory,In the cart,1. Click Continue Shopping,Inventory page opens,Low,Functional,Automated: tests/cart.spec.ts
+TC-021,Checkout,Complete an order with one item,Item in cart,1. Click Checkout 2. Fill valid details 3. Continue 4. Finish,Confirmation message is shown,High,Functional,Automated: tests/checkout.spec.ts
+TC-022,Checkout,First name required,Item in cart,1. Go to checkout 2. Leave first name empty 3. Continue,Error says first name is required,High,Negative,Automated: tests/checkout.spec.ts
+TC-023,Checkout,Last name required,Item in cart,1. Go to checkout 2. Leave last name empty 3. Continue,Error says last name is required,High,Negative,Automated: tests/checkout.spec.ts
+TC-024,Checkout,Postal code required,Item in cart,1. Go to checkout 2. Leave postal code empty 3. Continue,Error says postal code is required,High,Negative,Automated: tests/checkout.spec.ts
+TC-025,Checkout,Order total equals item total plus tax,Items in cart,"1. Reach the overview page 2. Compare item total, tax and total",Total equals item total plus tax,High,Functional,Automated: tests/checkout.spec.ts
+TC-026,Checkout,Cancel returns to the cart,On information page,1. Click Cancel,Cart page opens with items kept,Low,Functional,Automated: tests/checkout.spec.ts
+TC-027,Checkout,Cart is empty after an order,Order completed,1. Complete an order 2. Check the cart,Cart is empty,Medium,Functional,Automated: tests/checkout.spec.ts
+TC-028,Checkout,Special characters and long text in the form,Item in cart,"1. Enter symbols, emoji and a very long name 2. Continue",Input is accepted or rejected with a clear message; no crash,Low,Negative,Manual
+TC-029,Checkout,Double-click Finish does not create two orders,On overview page,1. Double-click Finish,One confirmation; no duplicate order,High,Negative,Manual
+TC-030,Layout,Pages display correctly at a narrow window width,Logged in,1. Resize the browser to a narrow width 2. Visit each page,Content stays readable and usable,Medium,Usability,Manual
+TC-031,Accessibility,All main actions work with the keyboard,Logged in,"1. Use Tab and Enter only to log in, add an item and check out",Every step is reachable and focus is visible,Medium,Accessibility,Manual
+TC-032,Cross-browser,"Main flow works in Chromium, Firefox and WebKit",None,1. Run the checkout flow in each browser,Same result in all browsers,High,Compatibility,Automated: all browser projects

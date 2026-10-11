@@ -5,33 +5,33 @@ test.beforeEach(async ({ page }) => {
   await page.goto('/');
 });
 
-test('Valid Login', async ({ page, loginPage }) => {
+test('Valid Login', { tag: ['@smoke', '@ui'] }, async ({ page, loginPage }) => {
   await loginPage.login(users.standard.username, users.standard.password);
   await expect(page).toHaveURL(/inventory\.html/);
   await expect(page.locator('.inventory_container')).toBeVisible();
 });
 
-test('Locked out user', async ({ loginPage }) => {
+test('Locked out user', { tag: ['@negative', '@ui'] }, async ({ loginPage }) => {
   await loginPage.login(users.lockedOut.username, users.lockedOut.password);
   await loginPage.verifyLockedOutError();
 });
 
-test('Invalid password', async ({ loginPage }) => {
+test('Invalid password', { tag: ['@negative', '@ui'] }, async ({ loginPage }) => {
   await loginPage.login(users.invalidPassword.username, users.invalidPassword.password);
   await loginPage.invalidPasswordMsg();
 });
 
-test('Invalid User', async ({ loginPage }) => {
+test('Invalid User', { tag: ['@negative', '@ui'] }, async ({ loginPage }) => {
   await loginPage.login(users.invalidUsername.username, users.invalidUsername.password);
   await loginPage.invalidUserMsg();
 });
 
-test('Empty username shows a required message', async ({ loginPage }) => {
+test('Empty username shows a required message', { tag: ['@negative', '@ui'] }, async ({ loginPage }) => {
   await loginPage.login(users.emptyUsername.username, users.emptyUsername.password);
   await loginPage.verifyError('Epic sadface: Username is required');
 });
 
-test('Empty password shows a required message', async ({ loginPage }) => {
+test('Empty password shows a required message', { tag: ['@negative', '@ui'] }, async ({ loginPage }) => {
   await loginPage.login(users.emptyPassword.username, users.emptyPassword.password);
   await loginPage.verifyError('Epic sadface: Password is required');
 });
