@@ -1,6 +1,10 @@
 # E-Commerce Test Automation Framework
 
-A test automation framework for an e-commerce application, built with **Playwright** and **TypeScript**. It covers **UI, API, negative and regression testing**, and includes the manual test documentation that goes with them.
+![CI](https://github.com/kshnshrivastav-hash/E-Commerce-PW-FW/actions/workflows/playwright.yml/badge.svg)
+
+*Reference framework showing how I structure UI + API test automation for an e-commerce app.*
+
+A test automation framework for an e-commerce application, built with **Playwright** and **TypeScript**. It covers **UI, API, negative and regression testing**, and includes the manual test documentation that goes with them. In total: **77 automated tests** (29 UI, run on 3 browsers, plus 48 API) and **32 documented manual cases**.
 
 - **UI tests** run against the public demo store [saucedemo.com](https://www.saucedemo.com).
 - **API tests** run against a small local shop API (`mock/shop-server.js`) that mirrors the store's products, users, cart and checkout. The demo store has no public API, so I built this one to practise API testing. It starts automatically when the tests run.
@@ -33,6 +37,14 @@ A test automation framework for an e-commerce application, built with **Playwrig
 - **Web-first assertions** with no fixed waits
 - **Reports:** HTML report, screenshots and videos on failure, traces on retry
 - **CI with GitHub Actions:** API and smoke tests on every push, full regression nightly
+
+## Sample run
+
+<!-- After you take a screenshot of the HTML report, save it as docs/playwright-report.png and remove this comment line and the next one's markers:
+![Playwright HTML report](docs/playwright-report.png)
+-->
+
+Run `npm test` and then `npm run report` to open the HTML report with results, failure screenshots and traces.
 
 ## Project structure
 
